@@ -9,7 +9,11 @@ if [ "$ENABLE_PROVER" == "true" ]; then
     fi
 
     WAIT_HOSTS=${RPCD}:9000 WAIT_TIMEOUT=180 ./wait
-    mkdir /data
+    
+    if [ ! -d "/data" ]; then
+        mkdir "/data"
+    fi
+    
     taiko-client prover \
         --l1.ws ${L1_ENDPOINT_WS} \
         --l2.ws ws://l2_execution_engine:${PORT_L2_EXECTION_ENGINE_WS} \
